@@ -8,3 +8,4 @@ edition = "2024"
 # https://github.com/exercism/rust-test-runner/blob/main/local-registry/Cargo.toml
 [dependencies]
 itertools = "0.15.0"
+unicode-segmentation = "1.13.3"

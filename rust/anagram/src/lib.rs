@@ -1,15 +1,18 @@
 use std::collections::HashSet;
 use itertools::Itertools;
+use unicode_segmentation::UnicodeSegmentation;
 
 fn is_anagram_of(possible_anagram: &str, word: &str) -> bool {
     if possible_anagram.len() != word.len() {
         return false
     }
-    if possible_anagram.to_lowercase() == word.to_lowercase() {
+    let a: String = possible_anagram.graphemes(true).collect();
+    let b: String = word.graphemes(true).collect();
+    if a.to_lowercase() == b.to_lowercase() {
         return false
     }
-    let word_ordered_letters = word.to_lowercase().chars().sorted().join("");
-    let possible_anagram_ordered_letters = word.to_lowercase().chars().sorted().join("");
+    let word_ordered_letters = a.to_lowercase().chars().sorted().join("");
+    let possible_anagram_ordered_letters = b.to_lowercase().chars().sorted().join("");
     word_ordered_letters == possible_anagram_ordered_letters
 }
 
