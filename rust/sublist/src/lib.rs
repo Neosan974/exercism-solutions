@@ -44,11 +44,17 @@ fn is_sublist(first_list: &[i32], second_list: &[i32]) -> bool {
     true
 }
 
+fn is_superlist(first_list: &[i32], second_list: &[i32]) -> bool {
+    is_sublist(second_list, first_list)
+}
+
 pub fn sublist(first_list: &[i32], second_list: &[i32]) -> Comparison {
     if are_equal(first_list, second_list) {
         return Comparison::Equal;
     } else if is_sublist(first_list, second_list) {
         return Comparison::Sublist;
+    } else if is_superlist(first_list, second_list) {
+        return Comparison::Superlist;
     } else {
         return Comparison::Unequal;
     }
