@@ -3,7 +3,7 @@ use quote::quote;
 use syn::{ItemStruct, LitFloat, parse_macro_input};
 
 #[proc_macro_attribute]
-pub fn planet_ratio(attr: TokenStream, item: TokenStream) -> TokenStream {
+pub fn planet_year_ratio(attr: TokenStream, item: TokenStream) -> TokenStream {
     // 1. On parse l'argument de l'attribut comme un nombre à virgule flottante (f64)
     let ratio = parse_macro_input!(attr as LitFloat);
 
