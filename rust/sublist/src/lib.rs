@@ -23,25 +23,19 @@ fn is_sublist(first_list: &[i32], second_list: &[i32]) -> bool {
         return false;
     }
 
-    let value = first_list.first();
-    if value.is_none() {
-        // If no value in first, it's always a sublist
+    if first_list.is_empty() {
         return true;
     }
 
-    let index = second_list.iter().position(|e| e == value.unwrap());
-    if index.is_none() {
-        // If first item doesn't exist in second list, it cannot be a sublist
-        return false;
-    } else {
-        let second_list_index = index.unwrap();
-        for i in 0..first_list.len() {
-            if first_list[i] != second_list[second_list_index + i] {
-                return false;
-            }
+    for i in 0..second_list.len() {
+        if second_list[i] == first_list.first().unwrap().to_owned()
+            && are_equal(first_list, &second_list[i..(first_list.len() + i)])
+        {
+            return true;
         }
     }
-    true
+
+    false
 }
 
 fn is_superlist(first_list: &[i32], second_list: &[i32]) -> bool {
