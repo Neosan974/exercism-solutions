@@ -1,20 +1,19 @@
+use regex::Regex;
+
 /// Check a Luhn checksum.
 pub fn is_valid(code: &str) -> bool {
     let stripped = code.replace(" ", "");
 
-    if stripped.len() <= 1 {
+    // Here checking both length and only numbers in stripped input
+    let regex = Regex::new(r"^\d\d+$").unwrap();
+    if !regex.is_match(&stripped) {
         return false;
     }
 
-    let mut chars = stripped.chars();
-    if chars.any(|char| !char.is_numeric()) {
-        return false;
-    }
-
-    let mut numbers: Vec<u32> = vec![];
-    for c in stripped.chars() {
-        numbers.push(u32::from_str_radix(&c.to_string(), 10).unwrap());
-    }
+    let mut numbers: Vec<u32> = stripped
+        .chars()
+        .map(|c| u32::from_str_radix(&c.to_string(), 10).unwrap())
+        .collect();
     numbers.reverse();
     for i in 0..numbers.len() {
         if i % 2 == 0 {
