@@ -14,7 +14,7 @@ pub fn factors(n: u64) -> Vec<u64> {
             result.push(i);
             value /= i;
         } else {
-            i += 1;
+            i += if i == 2 { 1 } else { 2 };
         }
     }
     result
