@@ -16,12 +16,14 @@ fn get_factors_of_less_than(of: u32, limit: u32) -> Vec<u32> {
 }
 
 pub fn sum_of_multiples(limit: u32, factors: &[u32]) -> u32 {
-    let mut list_of_factors: Vec<u32> = factors
-        .iter()
-        .flat_map(|&e| get_factors_of_less_than(e, limit))
-        .collect();
-    println!("factors before dedup : {:?}", list_of_factors);
-    list_of_factors.dedup();
-    println!("factors after dedup : {:?}", list_of_factors);
+    let mut list_of_factors: Vec<u32> = vec![];
+    for &factor in factors {
+        let fs = get_factors_of_less_than(factor, limit);
+        for f in fs {
+            if !list_of_factors.contains(&f) {
+                list_of_factors.push(f);
+            }
+        }
+    }
     list_of_factors.iter().sum()
 }
