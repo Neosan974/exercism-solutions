@@ -9,12 +9,11 @@ fn get_student_index(student: &str) -> usize {
 fn get_plant_letters_of_student_by_index(rows: Vec<&str>, student_index: usize) -> Vec<&str> {
     let mut res: Vec<&str> = vec![];
     let index = student_index * 2;
-    let first_row: Vec<&str> = rows[0].split("").filter(|&e| e != "").into_iter().collect();
-    res.push(first_row[index]);
-    res.push(first_row[index + 1]);
-    let second_row: Vec<&str> = rows[1].split("").filter(|&e| e != "").into_iter().collect();
-    res.push(second_row[index]);
-    res.push(second_row[index + 1]);
+    for i in 0..=1 {
+        let row: Vec<&str> = rows[i].split("").filter(|&e| e != "").into_iter().collect();
+        res.push(row[index]);
+        res.push(row[index + 1]);
+    }
     res
 }
 
