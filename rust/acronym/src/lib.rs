@@ -1,3 +1,5 @@
 pub fn abbreviate(phrase: &str) -> String {
-    todo!("Given the phrase '{phrase}', return its acronym");
+    let acronym = phrase.split(&[' ', '-']).map(|word| word.replace("_", "").get(..1).unwrap().to_string().to_uppercase()).collect();
+    println!("{:?}", acronym);
+    acronym
 }
