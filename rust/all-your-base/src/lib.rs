@@ -78,7 +78,9 @@ pub fn convert(number: &[u32], from_base: u32, to_base: u32) -> Result<Vec<u32>,
         i -= 1;
     }
 
-    result = result.trim_prefix(&[0]).to_vec();
+    while result.first().is_some_and(|&r| r == 0) {
+        result.remove(0);
+    }
 
     if result.is_empty() {
         result.push(0);
